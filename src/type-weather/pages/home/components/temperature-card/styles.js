@@ -2,10 +2,11 @@ import styled from "styled-components/native";
 
 export const Tempeature = styled.View`
   width: 360px;
-  height: 266px;
+  height: 246px;
   background-color: #000000;
   border-radius: 10px;
   opacity: 0.5;
+  justify-content: center;
 `;
 
 export const TempeatureCardTop = styled.View`
