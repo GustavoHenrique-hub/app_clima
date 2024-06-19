@@ -7,8 +7,6 @@ import {
   MiddleContainer,
   MiddleContainerForecastView,
   ForecastContainer,
-  Forecast,
-  ForecastDay,
   Input,
 } from "./styles";
 import { useState } from "react";
@@ -18,6 +16,8 @@ import { useFonts, Nunito_700Bold } from "@expo-google-fonts/nunito";
 import Card from "./components/temperature-card/index";
 import axios from "axios";
 import { FlatList, Dimensions } from "react-native";
+
+import ForecastCard from "./components/forecast-card";
 
 const key = "afb5fd1ea152ce949db3fa511fc4ce34";
 
@@ -180,23 +180,7 @@ export default function Home() {
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item) => String(item)}
                 renderItem={({ item, index }) => (
-                  <Forecast
-                    style={{
-                      height: width / 2.6,
-                      width: width * 0.8 - 32,
-                      marginHorizontal: 16,
-                    }}
-                  >
-                    {forecastArray[index] && 
-                    forecastArray[index].main !== null 
-                    ? (
-                      <ForecastDay style={{ fontFamily: "Nunito_700Bold" }}>
-                        {forecastArray[index].main}
-                      </ForecastDay>
-                    ) : (
-                      <ForecastDay>{forecastArray[index]}</ForecastDay>
-                    )}
-                  </Forecast>
+                  <ForecastCard forecastArray={forecastArray} index={index}/>
                 )}
               ></FlatList>
             </ForecastContainer>
