@@ -44,13 +44,14 @@ const meses = [
   "Outubro",
   "Novembro",
   "Dezembro",
-]
+];
 
 const { width } = Dimensions.get("window");
 
 export default function Home() {
   const [stateTemperatura, setStateTemperatura] = useState();
   const [descricao, setDescricao] = useState("");
+  const [cidadeInput, setCidadeInput] = useState("");
   const [cidade, setCidade] = useState("");
 
   const [stateTempMin, setStateTempMin] = useState("");
@@ -67,8 +68,8 @@ export default function Home() {
   }
 
   const callApi = () => {
-    const searchApi = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&lang=pt_br&units=metric&appid=${key}`;
-    const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${key}&units=metric`;
+    const searchApi = `https://api.openweathermap.org/data/2.5/weather?q=${cidadeInput}&lang=pt_br&units=metric&appid=${key}`;
+    const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?q=${cidadeInput}&appid=${key}&units=metric`;
 
     try {
       axios
@@ -77,8 +78,9 @@ export default function Home() {
           console.log(dadoTemperatura.data.main);
           setDescricao(dadoTemperatura.data.weather[0].description);
           setStateTemperatura(dadoTemperatura.data.main.temp);
-          setStateTempMin(dadoTemperatura.data.main.temp_min)
-          setStateTempMax(dadoTemperatura.data.main.temp_max)
+          setStateTempMin(dadoTemperatura.data.main.temp_min);
+          setStateTempMax(dadoTemperatura.data.main.temp_max);
+          setCidade(dadoTemperatura.data.name);
         })
         .catch((error) => {
           console.error(error);
@@ -92,10 +94,13 @@ export default function Home() {
             myTempArray.push({
               main: foreCastData.data.list[i].weather[0].main,
               icon: `https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}.png`,
-              temp_max: Number.parseInt(foreCastData.data.list[i].main.temp_max),
-              temp_min: Number.parseInt(foreCastData.data.list[i].main.temp_min),
+              temp_max: Number.parseInt(
+                foreCastData.data.list[i].main.temp_max
+              ),
+              temp_min: Number.parseInt(
+                foreCastData.data.list[i].main.temp_min
+              ),
               humidity: foreCastData.data.list[i].main.humidity,
-
             });
             console.log(myTempArray);
           }
@@ -138,10 +143,10 @@ export default function Home() {
           placeholder="Pesquisar cidade"
           placeholderTextColor={"#CBCBCB"}
           onChangeText={(newText) => {
-            setCidade(newText);
+            setCidadeInput(newText);
           }}
           onSubmitEditing={callApi}
-          style={{fontFamily: "Nunito_700Bold"}}
+          style={{ fontFamily: "Nunito_700Bold" }}
         />
       </HeaderContainer>
       <ScrollScreen
@@ -152,7 +157,14 @@ export default function Home() {
         }}
       >
         <MiddleContainer>
-          <Card city={cidade} tempMin={stateTempMin} tempMax={stateTempMax} temp={stateTemperatura} desc={descricao} currentDate={currentDate}/>
+          <Card
+            city={cidade}
+            tempMin={stateTempMin}
+            tempMax={stateTempMax}
+            temp={stateTemperatura}
+            desc={descricao}
+            currentDate={currentDate}
+          />
 
           <MiddleContainerForecastView>
             <ForecastContainer>
@@ -173,10 +185,11 @@ export default function Home() {
                       height: width / 2.6,
                       width: width * 0.8 - 32,
                       marginHorizontal: 16,
-                      
                     }}
                   >
-                    <ForecastDay style={{fontFamily: "Nunito_700Bold"}}>{item}</ForecastDay>
+                    <ForecastDay style={{ fontFamily: "Nunito_700Bold" }}>
+                      {item}
+                    </ForecastDay>
                   </Forecast>
                 )}
               ></FlatList>
