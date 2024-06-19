@@ -70,11 +70,15 @@ export const ForecastContainer = styled.View`
 `;
 
 export const Forecast = styled.View`
-  width: 80px;
+  width: 300px;
   height: 160px;
   background-color: #000000;
-  border-radius: 10px;
+  border-radius: 20px;
   opacity: 0.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const MiddleContainer = styled.View`
@@ -91,5 +95,10 @@ export const MiddleContainerCard = styled.View`
 export const MiddleContainerForecastView = styled.View`
   margin-top: 20px;
 `;
+
+export const ForecastDay = styled.Text`
+  color: white;
+`
+
 
 export const ScrollScreen = styled.ScrollView``;
