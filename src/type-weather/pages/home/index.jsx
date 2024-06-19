@@ -187,9 +187,15 @@ export default function Home() {
                       marginHorizontal: 16,
                     }}
                   >
-                    <ForecastDay style={{ fontFamily: "Nunito_700Bold" }}>
-                      {item}
-                    </ForecastDay>
+                    {forecastArray[index] && 
+                    forecastArray[index].main !== null 
+                    ? (
+                      <ForecastDay style={{ fontFamily: "Nunito_700Bold" }}>
+                        {forecastArray[index].main}
+                      </ForecastDay>
+                    ) : (
+                      <ForecastDay>{forecastArray[index]}</ForecastDay>
+                    )}
                   </Forecast>
                 )}
               ></FlatList>
