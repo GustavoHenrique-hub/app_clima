@@ -52,13 +52,13 @@ export const TitleColored = styled.Text`
 `;
 
 export const Input = styled.TextInput`
+  font-family: "Nunito_700Bold";
   width: 91.5%;
   height: 70px;
   padding: 16px;
   color: white;
   border-radius: 10px;
-  background-color: #000000;
-  opacity: 0.5;
+  background-color: rgba(0, 0, 0, .5);
 `;
 
 export const ForecastContainer = styled.View`

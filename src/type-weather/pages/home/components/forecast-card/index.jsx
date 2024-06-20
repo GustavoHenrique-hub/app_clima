@@ -1,33 +1,65 @@
 import { Dimensions } from "react-native";
-import { Forecast, ForecastDay } from "./styles";
-import { useFonts, Nunito_700Bold } from "@expo-google-fonts/nunito";
+import {
+  ForecastContainerAll,
+  ForecastContainerTexts,
+  ForecastContainerViewMinMax,
+  ForecastContainerLeft,
+  ForecastContainerRight,
+  ForecastContainerRightImage,
+} from "./styles";
 
 const { width } = Dimensions.get("window");
 
 export default function ForecastCard(props) {
-  const [fontLoaded] = useFonts({
-    Nunito_700Bold,
-  });
-
-  if (!fontLoaded) {
-    return null;
-  }
   return (
-    <Forecast
+    <ForecastContainerAll
       style={{
-        height: width / 2.6,
+        height: width / 1.8,
         width: width * 0.8 - 32,
         marginHorizontal: 16,
       }}
     >
-      {props.forecastArray[props.index] &&
-      props.forecastArray[props.index].main !== null ? (
-        <ForecastDay style={{ fontFamily: "Nunito_700Bold" }}>
-          {props.forecastArray[props.index]}
-        </ForecastDay>
-      ) : (
-        <ForecastDay>{props.forecastArray[props.index]}</ForecastDay>
-      )}
-    </Forecast>
+      <ForecastContainerLeft>
+        {props.days && props.days !== null ? (
+          <ForecastContainerTexts>{`Day: ${props.days}`}</ForecastContainerTexts>
+        ) : (
+          " "
+        )}
+
+        {props.main && props.main !== null ? (
+          <ForecastContainerTexts>{`Weather: ${props.main}`}</ForecastContainerTexts>
+        ) : (
+          " "
+        )}
+
+        {props.tempMin && props.tempMax ? (
+          <ForecastContainerViewMinMax>
+            <ForecastContainerTexts>{`Min: ${props.tempMin}°`}</ForecastContainerTexts>
+            <ForecastContainerTexts>{`Max: ${props.tempMax}°`}</ForecastContainerTexts>
+          </ForecastContainerViewMinMax>
+        ) : (
+          " "
+        )}
+
+        {props.windSpeed ? (
+            <ForecastContainerTexts>{`Wind Speed: ${props.windSpeed}km`}</ForecastContainerTexts>
+        ) : (
+          " "
+        )}
+
+        {props.humidity ? (
+            <ForecastContainerTexts>{`Humidity: ${props.humidity}`}</ForecastContainerTexts>
+        ) : (
+          " "
+        )}
+      </ForecastContainerLeft>
+
+      <ForecastContainerRight>
+        <ForecastContainerRightImage
+          src={props.weatherIcon}
+          alt="Weather icon"
+        />
+      </ForecastContainerRight>
+    </ForecastContainerAll>
   );
 }

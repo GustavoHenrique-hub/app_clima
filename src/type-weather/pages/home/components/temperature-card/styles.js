@@ -3,9 +3,8 @@ import styled from "styled-components/native";
 export const Tempeature = styled.View`
   width: 360px;
   height: 246px;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, .5);
   border-radius: 10px;
-  opacity: 0.5;
   justify-content: center;
 `;
 
@@ -17,6 +16,7 @@ export const TempeatureCardTop = styled.View`
 `;
 
 export const TempeatureCardTopMinMax = styled.Text`
+  font-family: "Nunito_700Bold";
   font-size: 15px;
   color: #cbcbcb;
 `;
@@ -27,12 +27,14 @@ export const TempeatureCardMid = styled.View`
 `;
 
 export const TempeatureCardMidCity = styled.Text`
+  font-family: "Nunito_700Bold";
   text-align: center;
   font-size: 19px;
   color: #cbcbcb;
 `;
 
 export const TemperatureCardMidNumber = styled.Text`
+  font-family: "Nunito_700Bold";
   text-align: center;
   font-size: 78px;
   color: #cbcbcb;
@@ -48,11 +50,13 @@ export const TempeatureCardBot = styled.View`
 `;
 
 export const TempeatureCardBotDescription = styled.Text`
+  font-family: "Nunito_700Bold";
   font-size: 15px;
   color: #cbcbcb;
 `;
 
 export const TempeatureCardBotCurrentDate = styled.Text`
+  font-family: "Nunito_700Bold";
   font-size: 15px;
   color: #cbcbcb;
 `;

@@ -12,7 +12,6 @@ import {
 import { useState } from "react";
 import Background from "../../assets/images/ceu-limpo-background.png";
 import Logo from "../../assets/images/logotipo-NoSeuTempo.png";
-import { useFonts, Nunito_700Bold } from "@expo-google-fonts/nunito";
 import Card from "./components/temperature-card/index";
 import axios from "axios";
 import { FlatList, Dimensions } from "react-native";
@@ -59,14 +58,6 @@ export default function Home() {
 
   const [forecastArray, setForecastArray] = useState([]);
 
-  const [fontLoaded] = useFonts({
-    Nunito_700Bold,
-  });
-
-  if (!fontLoaded) {
-    return null;
-  }
-
   const callApi = () => {
     const searchApi = `https://api.openweathermap.org/data/2.5/weather?q=${cidadeInput}&lang=pt_br&units=metric&appid=${key}`;
     const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?q=${cidadeInput}&appid=${key}&units=metric`;
@@ -91,9 +82,10 @@ export default function Home() {
         .then((foreCastData) => {
           const myTempArray = [];
           for (let i = 7; i < 40; i += 8) {
+            console.log(`https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}@2x.png`)
             myTempArray.push({
               main: foreCastData.data.list[i].weather[0].main,
-              icon: `https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}.png`,
+              icon: `https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}@2x.png`,
               temp_max: Number.parseInt(
                 foreCastData.data.list[i].main.temp_max
               ),
@@ -101,8 +93,8 @@ export default function Home() {
                 foreCastData.data.list[i].main.temp_min
               ),
               humidity: foreCastData.data.list[i].main.humidity,
+              wind_speed: Number.parseFloat(foreCastData.data.list[i].wind.speed).toFixed(1)
             });
-            console.log(myTempArray);
           }
 
           setForecastArray(myTempArray);
@@ -146,7 +138,6 @@ export default function Home() {
             setCidadeInput(newText);
           }}
           onSubmitEditing={callApi}
-          style={{ fontFamily: "Nunito_700Bold" }}
         />
       </HeaderContainer>
       <ScrollScreen
@@ -180,7 +171,15 @@ export default function Home() {
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item) => String(item)}
                 renderItem={({ item, index }) => (
-                  <ForecastCard forecastArray={forecastArray} index={index}/>
+                  <ForecastCard
+                    days={item}
+                    main={forecastArray[index] ? forecastArray[index].main : " "}
+                    tempMin={forecastArray[index] ? forecastArray[index].temp_min : " "}
+                    tempMax={forecastArray[index] ? forecastArray[index].temp_max : " "}
+                    weatherIcon={forecastArray[index] ? forecastArray[index].icon : " "}
+                    windSpeed={forecastArray[index] ? forecastArray[index].wind_speed : " "}
+                    humidity={forecastArray[index] ? forecastArray[index].humidity : " "}
+                    />
                 )}
               ></FlatList>
             </ForecastContainer>
