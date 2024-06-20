@@ -2,10 +2,11 @@ import { Dimensions } from "react-native";
 import {
   ForecastContainerAll,
   ForecastContainerTexts,
-  ForecastContainerViewMinMax,
   ForecastContainerLeft,
   ForecastContainerRight,
   ForecastContainerRightImage,
+  ForecastContainerDay,
+  ForecastContainerTemp,
 } from "./styles";
 
 const { width } = Dimensions.get("window");
@@ -21,37 +22,43 @@ export default function ForecastCard(props) {
     >
       <ForecastContainerLeft>
         {props.days && props.days !== null ? (
-          <ForecastContainerTexts>{`Day: ${props.days}`}</ForecastContainerTexts>
+          <ForecastContainerDay>{`${props.days}`}</ForecastContainerDay>
         ) : (
           " "
         )}
 
         {props.main && props.main !== null ? (
-          <ForecastContainerTexts>{`Weather: ${props.main}`}</ForecastContainerTexts>
+          <ForecastContainerTemp>{`${props.temp}°C`}</ForecastContainerTemp>
         ) : (
           " "
         )}
 
-        {props.tempMin && props.tempMax ? (
+        {props.main && props.main !== null ? (
+          <ForecastContainerTexts>{`${props.main}`}</ForecastContainerTexts>
+        ) : (
+          " "
+        )}
+
+        {/* {props.tempMin && props.tempMax ? (
           <ForecastContainerViewMinMax>
             <ForecastContainerTexts>{`Min: ${props.tempMin}°`}</ForecastContainerTexts>
             <ForecastContainerTexts>{`Max: ${props.tempMax}°`}</ForecastContainerTexts>
           </ForecastContainerViewMinMax>
         ) : (
           " "
-        )}
+        )} */}
 
-        {props.windSpeed ? (
-            <ForecastContainerTexts>{`Wind Speed: ${props.windSpeed}km`}</ForecastContainerTexts>
+        {/* {props.windSpeed ? (
+          <ForecastContainerTexts>{`Wind Speed: ${props.windSpeed}km`}</ForecastContainerTexts>
         ) : (
           " "
         )}
 
         {props.humidity ? (
-            <ForecastContainerTexts>{`Humidity: ${props.humidity}`}</ForecastContainerTexts>
+          <ForecastContainerTexts>{`Humidity: ${props.humidity}`}</ForecastContainerTexts>
         ) : (
           " "
-        )}
+        )} */}
       </ForecastContainerLeft>
 
       <ForecastContainerRight>
