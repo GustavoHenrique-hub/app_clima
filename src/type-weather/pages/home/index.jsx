@@ -14,7 +14,7 @@ import Background from "../../assets/images/ceu-limpo-background.png";
 import Logo from "../../assets/images/logotipo-NoSeuTempo.png";
 import Card from "./components/temperature-card/index";
 import axios from "axios";
-import { FlatList, Dimensions } from "react-native";
+import { FlatList, Dimensions, Modal } from "react-native";
 
 import ForecastCard from "./components/forecast-card";
 
@@ -60,7 +60,7 @@ export default function Home() {
 
   const callApi = () => {
     const searchApi = `https://api.openweathermap.org/data/2.5/weather?q=${cidadeInput}&lang=pt_br&units=metric&appid=${key}`;
-    const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?q=${cidadeInput}&appid=${key}&units=metric`;
+    const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?q=${cidadeInput}&lang=pt_br&units=metric&appid=${key}`;
 
     try {
       axios
@@ -82,10 +82,13 @@ export default function Home() {
         .then((foreCastData) => {
           const myTempArray = [];
           for (let i = 7; i < 40; i += 8) {
-            console.log(`https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}@2x.png`)
+            console.log(
+              `https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}@2x.png`
+            );
             myTempArray.push({
-              main: foreCastData.data.list[i].weather[0].main,
+              main: foreCastData.data.list[i].weather[0].description,
               icon: `https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}@2x.png`,
+              temp: Number.parseInt(foreCastData.data.list[i].main.temp),
               temp_max: Number.parseInt(
                 foreCastData.data.list[i].main.temp_max
               ),
@@ -93,7 +96,9 @@ export default function Home() {
                 foreCastData.data.list[i].main.temp_min
               ),
               humidity: foreCastData.data.list[i].main.humidity,
-              wind_speed: Number.parseFloat(foreCastData.data.list[i].wind.speed).toFixed(1)
+              wind_speed: Number.parseFloat(
+                foreCastData.data.list[i].wind.speed
+              ).toFixed(1),
             });
           }
 
@@ -173,13 +178,30 @@ export default function Home() {
                 renderItem={({ item, index }) => (
                   <ForecastCard
                     days={item}
-                    main={forecastArray[index] ? forecastArray[index].main : " "}
-                    tempMin={forecastArray[index] ? forecastArray[index].temp_min : " "}
-                    tempMax={forecastArray[index] ? forecastArray[index].temp_max : " "}
-                    weatherIcon={forecastArray[index] ? forecastArray[index].icon : " "}
-                    windSpeed={forecastArray[index] ? forecastArray[index].wind_speed : " "}
-                    humidity={forecastArray[index] ? forecastArray[index].humidity : " "}
-                    />
+                    main={
+                      forecastArray[index] ? forecastArray[index].main : " "
+                    }
+                    temp={
+                      forecastArray[index] ? forecastArray[index].temp : " "
+                    }
+                    tempMin={
+                      forecastArray[index] ? forecastArray[index].temp_min : " "
+                    }
+                    tempMax={
+                      forecastArray[index] ? forecastArray[index].temp_max : " "
+                    }
+                    weatherIcon={
+                      forecastArray[index] ? forecastArray[index].icon : " "
+                    }
+                    windSpeed={
+                      forecastArray[index]
+                        ? forecastArray[index].wind_speed
+                        : " "
+                    }
+                    humidity={
+                      forecastArray[index] ? forecastArray[index].humidity : " "
+                    }
+                  />
                 )}
               ></FlatList>
             </ForecastContainer>

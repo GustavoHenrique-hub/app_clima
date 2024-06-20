@@ -7,7 +7,7 @@ import {
   TemperatureCardMidNumber,
   TempeatureCardBot,
   TempeatureCardBotDescription,
-  TempeatureCardBotCurrentDate
+  TempeatureCardBotCurrentDate,
 } from "./styles";
 
 export default function Card(props) {
@@ -15,25 +15,27 @@ export default function Card(props) {
     <Tempeature>
       <TempeatureCardTop>
         <TempeatureCardTopMinMax>
-        {`Min ${Number.isNaN(Number.parseInt(props.tempMin)) === true
-            ? ""
-            : `${Number.parseInt(props.tempMin)}°`}`}
+          {`Min ${
+            Number.isNaN(Number.parseInt(props.tempMin)) === true
+              ? ""
+              : `${Number.parseInt(props.tempMin)}°`
+          }`}
         </TempeatureCardTopMinMax>
         <TempeatureCardTopMinMax>
-        {`Max ${Number.isNaN(Number.parseInt(props.tempMax)) === true
-            ? ""
-            : `${Number.parseInt(props.tempMax)}°`}`}
+          {`Max ${
+            Number.isNaN(Number.parseInt(props.tempMax)) === true
+              ? ""
+              : `${Number.parseInt(props.tempMax)}°`
+          }`}
         </TempeatureCardTopMinMax>
       </TempeatureCardTop>
 
       <TempeatureCardMid>
-        <TempeatureCardMidCity>
-          {props.city}
-        </TempeatureCardMidCity>
+        <TempeatureCardMidCity>{props.city}</TempeatureCardMidCity>
         <TemperatureCardMidNumber>
           {Number.isNaN(Number.parseInt(props.temp)) === true
             ? ""
-            : `${Number.parseInt(props.temp)}°c`}
+            : `${Number.parseInt(props.temp)}°C`}
         </TemperatureCardMidNumber>
       </TempeatureCardMid>
 

@@ -3,17 +3,33 @@ import styled from "styled-components/native";
 export const ForecastContainerAll = styled.View`
   width: 300px;
   height: 160px;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const ForecastContainerDay = styled.Text`
+  font-family: "Nunito_700Bold";
+  color: #cbcbcb;
+  font-size: 20px;
+  text-align: center;
+`;
+
+export const ForecastContainerTemp = styled.Text`
+  font-family: "Nunito_700Bold";
+  color: #cbcbcb;
+  font-size: 60px;
+  text-align: center;
 `;
 
 export const ForecastContainerTexts = styled.Text`
   font-family: "Nunito_700Bold";
-  color: white;
-  font-size: 15px;
+  color: #cbcbcb;
+  font-size: 20px;
+  text-align: center;
 `;
 
 export const ForecastContainerLeft = styled.View`
@@ -41,4 +57,3 @@ export const ForecastContainerRightImage = styled.Image`
   height: 100px;
   margin-right: 10px;
 `;
-

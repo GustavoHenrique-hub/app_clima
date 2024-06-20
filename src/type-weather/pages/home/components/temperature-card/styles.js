@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 export const Tempeature = styled.View`
   width: 360px;
   height: 246px;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   justify-content: center;
 `;
@@ -12,12 +12,12 @@ export const TempeatureCardTop = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 5px 16px;
 `;
 
 export const TempeatureCardTopMinMax = styled.Text`
   font-family: "Nunito_700Bold";
-  font-size: 15px;
+  font-size: 20px;
   color: #cbcbcb;
 `;
 
@@ -51,7 +51,7 @@ export const TempeatureCardBot = styled.View`
 
 export const TempeatureCardBotDescription = styled.Text`
   font-family: "Nunito_700Bold";
-  font-size: 15px;
+  font-size: 20px;
   color: #cbcbcb;
 `;
 
