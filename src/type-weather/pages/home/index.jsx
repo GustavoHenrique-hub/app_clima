@@ -86,19 +86,9 @@ export default function Home() {
               `https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}@2x.png`
             );
             myTempArray.push({
-              main: foreCastData.data.list[i].weather[0].description,
+              main: foreCastData.data.list[i].weather[0].main,
               icon: `https://openweathermap.org/img/wn/${foreCastData.data.list[i].weather[0].icon}@2x.png`,
               temp: Number.parseInt(foreCastData.data.list[i].main.temp),
-              temp_max: Number.parseInt(
-                foreCastData.data.list[i].main.temp_max
-              ),
-              temp_min: Number.parseInt(
-                foreCastData.data.list[i].main.temp_min
-              ),
-              humidity: foreCastData.data.list[i].main.humidity,
-              wind_speed: Number.parseFloat(
-                foreCastData.data.list[i].wind.speed
-              ).toFixed(1),
             });
           }
 
@@ -169,7 +159,7 @@ export default function Home() {
                 horizontal
                 snapToAlignment={"start"}
                 snapToOffsets={[...Array(displayedWeather.length)].map(
-                  (x, i) => i * (width * 0.8 - 40) + (i - 1) * 40
+                  (x, i) => i * (width * 0.45 - 32) + (i - 1) * 32
                 )}
                 scrollEventThrottle={16}
                 decelerationRate={"normal"}
@@ -184,26 +174,12 @@ export default function Home() {
                     temp={
                       forecastArray[index] ? forecastArray[index].temp : " "
                     }
-                    tempMin={
-                      forecastArray[index] ? forecastArray[index].temp_min : " "
-                    }
-                    tempMax={
-                      forecastArray[index] ? forecastArray[index].temp_max : " "
-                    }
                     weatherIcon={
                       forecastArray[index] ? forecastArray[index].icon : " "
                     }
-                    windSpeed={
-                      forecastArray[index]
-                        ? forecastArray[index].wind_speed
-                        : " "
-                    }
-                    humidity={
-                      forecastArray[index] ? forecastArray[index].humidity : " "
-                    }
                   />
                 )}
-              ></FlatList>
+              />
             </ForecastContainer>
           </MiddleContainerForecastView>
         </MiddleContainer>

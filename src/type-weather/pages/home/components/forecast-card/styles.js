@@ -1,12 +1,10 @@
 import styled from "styled-components/native";
 
 export const ForecastContainerAll = styled.View`
-  width: 300px;
-  height: 160px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 `;
@@ -21,7 +19,7 @@ export const ForecastContainerDay = styled.Text`
 export const ForecastContainerTemp = styled.Text`
   font-family: "Nunito_700Bold";
   color: #cbcbcb;
-  font-size: 60px;
+  font-size: 30px;
   text-align: center;
 `;
 
